@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<link rel="shortcut icon" type="image/x-icon" href="https://jelena-vk-itt.github.io/jvk-tudt-notes/rwat/res/images/logo.png" />
+	<link rel="stylesheet" type="text/css" href="https://jelena-vk-itt.github.io/jvk-tudt-notes/common/res/styles/common.css" />
+	<title>BS&JS</title>
+
+	<style>
+	 #content-no-nav { background-color: lightgray; }
+	 .box { border: 1px solid black; border-radius: 0.5em; }
+	 img.content { width: 20em; }
+	</style>
+    </head>
+
+    <body>
+	<header id="tudheader">
+	    <img id="leftlogo" src="https://jelena-vk-itt.github.io/jvk-tudt-notes/common/res/images/tudublin_logo.png" alt="TU Dublin Logo">
+	    <div id="tuddepttext">
+		<p>School of Computer Science</p>
+	    </div>
+	    <div id="titlecontainer"><div id="title">Flexbox, Web APIs, Conditional CSS</div></div>
+	    <img id="rightlogo" src="https://jelena-vk-itt.github.io/jvk-tudt-notes/rwat/res/images/logo.png" alt="Logo">
+	</header>
+
+	<div id="content">
+
+	    <article>
+		<h3>Lab description</h3>
+		<p>The purpose of this lab is to give the student a taste of the wide range of standard material available to the client-side web developer.</p>
+		<h3>Assignment</h3>
+		<p>Develop a client-side application that fulfils the following requirements.</p>
+		<ul>
+		    <li>The application should implement the <a href="https://en.wikipedia.org/wiki/Sliding_puzzle">sliding puzzle</a> game with 9 tiles (on the Wikipedia page, see the example with a picture of a female superhero, using 9 tiles). </li>
+		    <li>The game starts with the user being prompted as to whether they would like to start from scratch or continue their previous game. If this is the first time they are playing, the only option is to start. Then the user is asked about the level of complexity they would like. Once they specify this, the game starts.</li>
+		    <li>Internally, the game will start with the arrangement shown in the picture, which is jumbled by random movements during initialisation. The number of random movements that jumble the tiles depends on the level of complexity (you can decide on how many but this can be calibrated when testing).
+			<br><br><img class="content" src="images/target.png">
+		    </li>
+		    <li>The user should be given the option to save the game at any time during play, so that they can continue to play later.</li>
+		    <li>The user can slide a tile into the empty space if they it is in a space adjacent to toe empty space.</li>
+		    <li>The game ends when the tiles are arranged in the correct order. When this is achieved, the 9th tile is inserted by the program and a suitable message displayed.</li>
+		    <li>The design of the page displaying the completed picture should be slightly different for the print medium, for example including a frame.</li>
+		</ul>
+
+
+		<p><strong>Rules:</strong></p>
+
+		<ul>
+		    <li>You may use the tiles provided in the <em>images</em> directory or use an image splitter (there are many phone and web apps of this kind) to split an image of your own into 9 parts.</li>
+		    <li>Use one HTML file, one CSS file and one Javascript file for the implementation.</li>
+		    <li>Use a suitable input element (there are a few that would work) for the user to input the level of complexity.</li>
+		    <li>Implement the layout with the use of flexbox.</li>
+		    <li>Implement the tile movements using the drag and drop API.</li>
+		    <li>Implement the game saving mechanism using the local storage API.</li>
+		    <li>Use at least two CSS complex selectors.</li>
+		    <li>Use conditional CSS to style the page for printing.</li>
+		</ul>
+
+		<p><strong>Additional instructions:</strong></p>
+		<ul>
+		    <li>Clarify the requirements with the tutor in the lab if needed, before starting work on the assignment. With every set of requirements, there is a possibility of under-specification or a lack of clarity. It is the job of the developer to make every effort to fully understand the requirements (as it is, indeed, the job of those laying out the requirements to make the best effort to make them clear and comprehensive - an broader example of the application of <a href="https://en.wikipedia.org/wiki/Robustness_principle">Postel's law</a>).</li>
+		</ul>
+			
+
+	    </article>
+	</div>
+    </body>
+</html>
