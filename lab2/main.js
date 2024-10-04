@@ -100,9 +100,10 @@ let dragged = null;
 
 // Drag and Drop API
 function drop(ev) {
-    ev.preventDefault;
-    var data = ev.dataTransfer.getData("image")
-    ev.target.appendChild(document.getElementById(data));
+    ev.preventDefault();
+    target = ev.target;
+
+    swapBoxes(dragged, target);
 }
 
 function allowDrop(ev) {
@@ -111,7 +112,38 @@ function allowDrop(ev) {
 
 function drag(ev) {
     dragged = ev.target;
-    ev.dataTransfer.setData("image", ev.target.id);
-    console.log(dragged);
+    
+    var images = document.querySelectorAll('#gameTable img');
+    images.forEach((img, index) => {
+        console.log(img.src);
+    })
+}
+
+//TODO Check if selected item is adjacent to empty tile
+
+
+// If selected item is adjacent swap the two tiles.
+function swapBoxes(selected, target) {
+    console.log("Before Selected: ", selected.src);
+    console.log("Before Target: ", target.firstElementChild.src);
+
+    if(selected != target) {
+        temp = target.firstElementChild.src;
+        target.firstElementChild.src = selected.src;
+        selected.src = "";
+    }
+    else {
+        alert("Cannot move to same place!");
+    }
+
+    var images = document.querySelectorAll('#gameTable img');
+    images.forEach((img, index) => {
+        console.log("Box ", index + 1, ": ", img.src);
+    })
+
+    console.log("After Selected: ", selected.src);
+    console.log("After Target: ", target.firstElementChild.src);
+    
+    
 }
 
