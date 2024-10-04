@@ -2,6 +2,7 @@
 function checkStorage() {
     if (typeof(Storage) !== "undefined") {
 
+        // Previous game button
         const previousGame = document.getElementsByClassName("previousGame");
 
         // If first time playing 
@@ -13,6 +14,7 @@ function checkStorage() {
             console.log("Previous game exists");
             previousGame[0].style.display = "block";
             // localStorage.removeItem("previousSave");
+            // localStorage.removeItem("previousSaveArray");
         }
     }
     else {
@@ -29,7 +31,21 @@ const saveButton = document.getElementsByClassName("save");
 function startGame() {
     loginButtons[0].style.display = "none";
     difficultyButtons[0].style.display = "block";
+}
 
+function startPreviousGame() {
+    // Hide login buttons and show game and save button
+    loginButtons[0].style.display = "none";
+    game[0].style.display = "block";
+    saveButton[0].style.display = "block";
+
+    let previousGameSave = JSON.parse(localStorage.getItem("previousSaveArray"));
+    
+    var images = document.querySelectorAll('#gameTable img');
+    // Assign the randomly shuffled array to the image table
+    images.forEach((img, index) => {
+        img.src = previousGameSave[index];
+    })
 }
 
 // When one of the difficulty buttons are picked set the shuffle number to the number corresponding to the difficulty
@@ -77,6 +93,7 @@ function shuffleGame(shuffleNum) {
         }
     })
 
+
     game[0].style.display = "block";
     saveButton[0].style.display = "block";
 
@@ -93,7 +110,28 @@ function shuffleArray(array) {
 
 // save game option
 function saveGame() {
-    localStorage.setItem("previousSave", "true")
+    localStorage.setItem("previousSave", "true");
+
+    var images = document.querySelectorAll('#gameTable img');
+    let arrayImages = []
+    images.forEach((img) => {
+        let newImg = img.src.split('/').pop();
+        if (newImg === 'index.html') {
+            arrayImages.push("");
+        }
+        else {
+            arrayImages.push("./images/" + newImg);
+        }
+    })
+
+    localStorage.setItem("previousSaveArray", JSON.stringify(arrayImages));
+
+    const previousGame = document.getElementsByClassName("previousGame");
+
+    loginButtons[0].style.display = "block";
+    previousGame[0].style.display = "block";
+    game[0].style.display = "none";
+    saveButton[0].style.display = "none";
 }
 
 let dragged = null;
@@ -165,7 +203,9 @@ function swapBoxes(selected, target) {
     if(checkGameComplete()) {
         const finalBox = document.getElementById('box9');
         finalBox.src = "./images/p9.png";
+        resetGame();
         alert("Congratulations!");
+        
     }
 
     
@@ -195,3 +235,14 @@ function checkGameComplete() {
     return true;
 }
 
+function resetGame() {
+    loginButtons[0].style.display = "block";
+    game[0].style.display = "none";
+    saveButton[0].style.display = "none";
+    const previousGame = document.getElementsByClassName("previousGame");
+    previousGame[0].style.display = "none";
+    
+    // Reset saves
+    localStorage.removeItem("previousSave");
+    localStorage.removeItem("previousSaveArray");
+}
