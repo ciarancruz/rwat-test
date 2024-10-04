@@ -115,12 +115,7 @@ function allowDrop(ev) {
 
 function drag(ev) {
     dragged = ev.target;
-    
-    // Check image array
-    var images = document.querySelectorAll('#gameTable img');
-    images.forEach((img, index) => {
-        console.log("Box", index + 1, ":", img.src);
-    })
+    console.log(dragged.src);
 }
 
 // Returns the index of the image in the table if found
@@ -159,8 +154,6 @@ function checkAdjacent(selected, target) {
 
 // If selected item is adjacent swap the two tiles.
 function swapBoxes(selected, target) {
-    console.log("Before Selected: ", selected.src);
-    console.log("Before Target: ", target.firstElementChild.src);
 
     // Updates image array
     if(selected.src != target.src) {
@@ -168,16 +161,37 @@ function swapBoxes(selected, target) {
         target.firstElementChild.src = selected.src;
         selected.src = "";
     }
-
-    // Check image array
-    var images = document.querySelectorAll('#gameTable img');
-    images.forEach((img, index) => {
-        console.log("Box", index + 1, ":", img.src);
-    })
-
-    console.log("After Selected: ", selected.src);
-    console.log("After Target: ", target.firstElementChild.src);
     
+    if(checkGameComplete()) {
+        const finalBox = document.getElementById('box9');
+        finalBox.src = "./images/p9.png";
+        alert("Congratulations!");
+    }
+
     
+}
+
+const finishOrder = [
+    "p1.png",
+    "p2.png",
+    "p3.png",
+    "p4.png",
+    "p5.png",
+    "p6.png",
+    "p7.png",
+    "p8.png",
+    ""
+];
+
+function checkGameComplete() {
+    
+    let images = document.querySelectorAll('#gameTable img');
+    for(let i = 0; i < images.length - 1; i++) {
+        let finalImage = images[i].src.split('/').pop();
+        if (finalImage !== finishOrder[i]) {
+            return false;  // As soon as one image is out of place, return false
+        }
+    }
+    return true;
 }
 
