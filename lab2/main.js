@@ -103,7 +103,10 @@ function drop(ev) {
     ev.preventDefault();
     target = ev.target;
 
-    swapBoxes(dragged, target);
+    if(checkAdjacent(dragged, target)) {
+        swapBoxes(dragged, target);
+    }
+    
 }
 
 function allowDrop(ev) {
@@ -113,32 +116,63 @@ function allowDrop(ev) {
 function drag(ev) {
     dragged = ev.target;
     
+    // Check image array
     var images = document.querySelectorAll('#gameTable img');
     images.forEach((img, index) => {
-        console.log(img.src);
+        console.log("Box", index + 1, ":", img.src);
     })
 }
 
-//TODO Check if selected item is adjacent to empty tile
+// Returns the index of the image in the table if found
+function getImageIndex(image) {
+    var images = document.querySelectorAll('#gameTable img');
+    for(let i = 0; i < images.length; i++) {
+        if (images[i] === image) {
+            return i; // Gets index of image in table
+        }
+    }
 
+    return -1; // Not found
+}
+
+//TODO Check if selected item is adjacent to empty tile
+function checkAdjacent(selected, target) {
+    
+    const selectedIndex = getImageIndex(selected);
+    const targetIndex = getImageIndex(target.firstElementChild);
+
+    if (selectedIndex === -1 || targetIndex === -1) {
+        return false;
+    }
+
+    const selectedRow = Math.floor(selectedIndex / 3);
+    const selectedCol = selectedIndex % 3;
+    const targetRow = Math.floor(targetIndex / 3);
+    const targetCol = targetIndex % 3;
+
+    // Check if the tiles are adjacent (same row, next column or same column, next row)
+    const isAdjacent = (selectedRow === targetRow && Math.abs(selectedCol - targetCol) === 1) || (selectedCol === targetCol && Math.abs(selectedRow - targetRow) === 1);    
+
+    return isAdjacent;
+
+}
 
 // If selected item is adjacent swap the two tiles.
 function swapBoxes(selected, target) {
     console.log("Before Selected: ", selected.src);
     console.log("Before Target: ", target.firstElementChild.src);
 
-    if(selected != target) {
+    // Updates image array
+    if(selected.src != target.src) {
         temp = target.firstElementChild.src;
         target.firstElementChild.src = selected.src;
         selected.src = "";
     }
-    else {
-        alert("Cannot move to same place!");
-    }
 
+    // Check image array
     var images = document.querySelectorAll('#gameTable img');
     images.forEach((img, index) => {
-        console.log("Box ", index + 1, ": ", img.src);
+        console.log("Box", index + 1, ":", img.src);
     })
 
     console.log("After Selected: ", selected.src);
