@@ -28,6 +28,6 @@ body {
 
 @media print {
     #gameTable {
-        outline: 3px solid green;
+        outline: 5px solid green;
     }
 }
