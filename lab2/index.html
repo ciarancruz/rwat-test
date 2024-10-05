@@ -8,48 +8,49 @@
     <title>Puzzle Game</title>
 </head>
 <body onload="checkStorage();">
-    <div class="container-fluid">
-        <div class="row login">
-            <div class="col-sm-6"><button class="btn btn-outline-primary" onclick="startGame();">Start</button></div>
-            <div class="col-sm-6"><button class="btn btn-outline-secondary previousGame" onclick="startPreviousGame()">Continue Previous Game</button></div>
+    <div class="d-flex p-3 m-5 justify-content-center flex-column" id="container">
+        <div class="login d-flex flex-row justify-content-center">
+            <div class="p-3"><button class="btn btn-outline-primary" onclick="startGame();">Start</button></div>
+            <div class="p-3"><button class="btn btn-outline-secondary previousGame" onclick="startPreviousGame()">Continue Previous Game</button></div>
         </div>
-        <div class="row difficulty" style="display: none;">
-            <button class="btn btn-success" onclick="selectDifficulty('easy');">Easy</button>
-            <button class="btn btn-warning mt-3 mr-4" onclick="selectDifficulty('medium');">Medium</button>
-            <button class="btn btn-danger mt-3" onclick="selectDifficulty('hard');">Hard</button>
+        <div class="difficulty d-flex flex-row justify-content-evenly d-none">
+            <button class="btn btn-outline-success" onclick="selectDifficulty('easy');">Easy</button>
+            <button class="btn btn-outline-warning" onclick="selectDifficulty('medium');">Medium</button>
+            <button class="btn btn-outline-danger" onclick="selectDifficulty('hard');">Hard</button>
         </div>
-        <div class="row game" style="display: none;">
-            <div class="col">
-                <table id="gameTable">
-                    <tr>
-                        <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place1">
-                            <img src="./images/p1.png" draggable="true" ondragstart="drag(event)" id="box1"></th>
-                        <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place2">
-                            <img src="./images/p2.png" draggable="true" ondragstart="drag(event)" id="box2"></th>
-                        <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place3">
-                            <img src="./images/p3.png" draggable="true" ondragstart="drag(event)" id="box3"></th>
-                    </tr>
-                    <tr>
-                        <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place4">
-                            <img src="./images/p4.png" draggable="true" ondragstart="drag(event)" id="box4"></th>
-                        <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place5">
-                            <img src="./images/p5.png" draggable="true" ondragstart="drag(event)" id="box5"></th>
-                        <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place6">
-                            <img src="./images/p6.png" draggable="true" ondragstart="drag(event)" id="box6"></th>
-                    </tr>
-                    <tr>
-                        <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place7">
-                            <img src="./images/p7.png" draggable="true" ondragstart="drag(event)" id="box7"></th>
-                        <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place8">
-                            <img src="./images/p8.png" draggable="true" ondragstart="drag(event)" id="box8"></th>
-                        <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place9">
-                            <img src="#" draggable="true" ondragstart="drag(event)" id="box9"></th>
-                    </tr>
-                </table>
-            </div>
+        <div class="game d-flex flex-row justify-content-center d-none">
+            <table id="gameTable">
+                <tr>
+                    <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place1">
+                        <img src="./images/p1.png" draggable="true" ondragstart="drag(event)" id="box1"></th>
+                    <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place2">
+                        <img src="./images/p2.png" draggable="true" ondragstart="drag(event)" id="box2"></th>
+                    <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place3">
+                        <img src="./images/p3.png" draggable="true" ondragstart="drag(event)" id="box3"></th>
+                </tr>
+                <tr>
+                    <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place4">
+                        <img src="./images/p4.png" draggable="true" ondragstart="drag(event)" id="box4"></th>
+                    <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place5">
+                        <img src="./images/p5.png" draggable="true" ondragstart="drag(event)" id="box5"></th>
+                    <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place6">
+                        <img src="./images/p6.png" draggable="true" ondragstart="drag(event)" id="box6"></th>
+                </tr>
+                <tr>
+                    <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place7">
+                        <img src="./images/p7.png" draggable="true" ondragstart="drag(event)" id="box7"></th>
+                    <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place8">
+                        <img src="./images/p8.png" draggable="true" ondragstart="drag(event)" id="box8"></th>
+                    <th ondrop="drop(event)" ondragover="allowDrop(event)" id="place9">
+                        <img src="#" draggable="true" ondragstart="drag(event)" id="box9"></th>
+                </tr>
+            </table>
         </div>
-        <div class="row save" style="display: none;">
-            <button class="btn btn-info mt-3" onclick="saveGame();">Save Game</button>
+        <div class="save d-flex flex-row justify-content-center d-none mt-3">
+            <button class="btn btn-outline-info" onclick="saveGame();">Save Game</button>
+        </div>
+        <div class="new d-flex flex-row justify-content-center d-none mt-3">
+            <button class="btn btn-outline-success" onclick="resetGame();">New Game</button>
         </div>
     </div>
         

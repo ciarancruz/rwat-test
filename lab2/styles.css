@@ -1,3 +1,33 @@
+body {
+    background-color: lightgrey;
+}
+
 .box {
     cursor: move;
+}
+
+#container {
+    outline: 2px solid black;
+    background-color: white;
+    border-radius: 1em;
+}
+
+
+#gameTable th{
+    outline: 1px solid black;
+}
+
+#gameTable tr th > img {
+    width: 7rem;
+}
+
+#gameTable {
+    outline: 2px solid black
+}
+
+
+@media print {
+    #gameTable {
+        outline: 3px solid green;
+    }
 }

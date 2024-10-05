@@ -7,12 +7,12 @@ function checkStorage() {
 
         // If first time playing 
         if (localStorage.getItem("previousSave") !== "true") {
-            previousGame[0].style.display = "none";
+            previousGame[0].classList.add("d-none");
         }
         // if previous game exists
         else {
             console.log("Previous game exists");
-            previousGame[0].style.display = "block";
+            previousGame[0].classList.remove("d-none");
             // localStorage.removeItem("previousSave");
             // localStorage.removeItem("previousSaveArray");
         }
@@ -29,15 +29,15 @@ const game = document.getElementsByClassName("game");
 const saveButton = document.getElementsByClassName("save");
 
 function startGame() {
-    loginButtons[0].style.display = "none";
-    difficultyButtons[0].style.display = "block";
+    loginButtons[0].classList.add("d-none");
+    difficultyButtons[0].classList.remove("d-none");
 }
 
 function startPreviousGame() {
     // Hide login buttons and show game and save button
-    loginButtons[0].style.display = "none";
-    game[0].style.display = "block";
-    saveButton[0].style.display = "block";
+    loginButtons[0].classList.add("d-none");
+    game[0].classList.remove("d-none");
+    saveButton[0].classList.remove("d-none");
 
     let previousGameSave = JSON.parse(localStorage.getItem("previousSaveArray"));
     
@@ -56,19 +56,22 @@ function selectDifficulty(difficulty) {
     switch (difficulty) {
         case 'easy':
             shuffleNum = 1;
+            console.log("Easy");
             break;
         
         case 'medium':
             shuffleNum = 2;
+            console.log("Medium");
             break;
 
         default:
             shuffleNum = 3
+            console.log("Hard");
             break;
     }
 
     // Hide difficulty buttons once clicked
-    difficultyButtons[0].style.display = "none";
+    difficultyButtons[0].classList.add("d-none");
 
     shuffleGame(shuffleNum);
 }
@@ -81,6 +84,7 @@ function shuffleGame(shuffleNum) {
 
     for (let i = 0; i < shuffleNum; i++) {
         shuffleArray(imgArray);
+        console.log("Shuffle:", i);
     }
 
     var images = document.querySelectorAll('#gameTable img');
@@ -94,8 +98,8 @@ function shuffleGame(shuffleNum) {
     })
 
 
-    game[0].style.display = "block";
-    saveButton[0].style.display = "block";
+    game[0].classList.remove("d-none");
+    saveButton[0].classList.remove("d-none");
 
 }
 
@@ -128,10 +132,10 @@ function saveGame() {
 
     const previousGame = document.getElementsByClassName("previousGame");
 
-    loginButtons[0].style.display = "block";
-    previousGame[0].style.display = "block";
-    game[0].style.display = "none";
-    saveButton[0].style.display = "none";
+    loginButtons[0].classList.remove("d-none");
+    previousGame[0].classList.remove("d-none");
+    game[0].classList.add("d-none");
+    saveButton[0].classList.add("d-none");
 }
 
 let dragged = null;
@@ -190,6 +194,8 @@ function checkAdjacent(selected, target) {
 
 }
 
+const newGameButton = document.getElementsByClassName('new')
+
 // If selected item is adjacent swap the two tiles.
 function swapBoxes(selected, target) {
 
@@ -201,11 +207,13 @@ function swapBoxes(selected, target) {
     }
     
     if(checkGameComplete()) {
+        setTimeout(function() {
+            alert("Congratulations! You have completed the game!");
+            newGameButton[0].classList.remove("d-none");
+            saveButton[0].classList.add("d-none");
+        }, 2000);
         const finalBox = document.getElementById('box9');
         finalBox.src = "./images/p9.png";
-        resetGame();
-        alert("Congratulations!");
-        
     }
 
     
@@ -236,12 +244,13 @@ function checkGameComplete() {
 }
 
 function resetGame() {
-    loginButtons[0].style.display = "block";
-    game[0].style.display = "none";
-    saveButton[0].style.display = "none";
+    loginButtons[0].classList.remove("d-none");
+    game[0].classList.add("d-none");
+    saveButton[0].classList.add("d-none");
     const previousGame = document.getElementsByClassName("previousGame");
-    previousGame[0].style.display = "none";
-    
+    previousGame[0].classList.add("d-none");
+    newGameButton[0].classList.add("d-none");
+
     // Reset saves
     localStorage.removeItem("previousSave");
     localStorage.removeItem("previousSaveArray");
